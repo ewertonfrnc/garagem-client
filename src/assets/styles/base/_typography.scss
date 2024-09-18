@@ -1,0 +1,11 @@
+body {
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  color: $white-text-color;
+}
+
+.heading {
+  &__primary {
+    font-family: "Inter", sans-serif;
+  }
+}
