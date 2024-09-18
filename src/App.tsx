@@ -2,19 +2,19 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./routes/Home.tsx";
 import WorkoutView from "./routes/Workout.view.tsx";
-import Header from "./components/Header.component.tsx";
+// import Header from "./components/Header.component.tsx";
 
 export default function App() {
   return (
     <>
-      <Header />
+      {/*<Header />*/}
 
-      <main className={"flex gap-4 p-4"}>
-        <nav className={"rounded-xl bg-stone-800 p-4"}>GARAGEM</nav>
+      <main className={"flex h-screen gap-4 p-4"}>
+        <nav className={"rounded bg-stone-800 p-4"}>GARAGEM</nav>
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/workout" element={<WorkoutView />} />
+          <Route path="/workouts" element={<WorkoutView />} />
         </Routes>
       </main>
     </>
