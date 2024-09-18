@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./routes/Home.tsx";
 import WorkoutView from "./routes/Workout.view.tsx";
+import ExercisesView from "./routes/exercises.view.tsx";
 // import Header from "./components/Header.component.tsx";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/workouts" element={<WorkoutView />} />
+          <Route path="/exercises" element={<ExercisesView />} />
         </Routes>
       </main>
     </>
