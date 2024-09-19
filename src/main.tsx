@@ -8,13 +8,16 @@ import App from "./App.tsx";
 
 // import "./assets/styles/main.scss";
 import "./assets/base.css";
+import { WorkoutsProvider } from "./contexts/workouts.context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <ExercisesProvider>
-        <App />
-      </ExercisesProvider>
+      <WorkoutsProvider>
+        <ExercisesProvider>
+          <App />
+        </ExercisesProvider>
+      </WorkoutsProvider>
     </BrowserRouter>
   </StrictMode>,
 );
