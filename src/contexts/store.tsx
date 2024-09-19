@@ -6,18 +6,15 @@ type ContextTypes = {
   loading: boolean;
   error: string;
   exercises: Exercise[];
-  targets: string[];
 };
 export const ExercisesContext = createContext<ContextTypes>({
   error: "",
   loading: false,
-  targets: [],
   exercises: [],
 });
 
 type Props = { children: React.ReactNode };
 export const ExercisesProvider = ({ children }: Props) => {
-  const [targets, setTargets] = useState<string[]>([]);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -32,21 +29,11 @@ export const ExercisesProvider = ({ children }: Props) => {
     setLoading(false);
   }
 
-  function fetchAllExerciseTargets() {
-    setLoading(true);
-
-    ExercisesService.fetchAllExerciseTargets()
-      .then((targets) => setTargets(targets))
-      .catch((e) => setError(e));
-
-    setLoading(false);
-  }
-
   useEffect(() => {
-    fetchAllExerciseTargets();
+    fetchAllExercises();
   }, []);
 
-  const value = { loading, error, exercises, targets };
+  const value = { loading, error, exercises };
   return (
     <ExercisesContext.Provider value={value}>
       {children}
