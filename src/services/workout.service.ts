@@ -7,6 +7,11 @@ type WorkoutsResponse = {
   data: Workout[];
 };
 
+type WorkoutResponse = {
+  status: boolean;
+  data: Workout;
+};
+
 class WorkoutService {
   async createWorkout(workout: workoutFormValues) {
     const response = await api().post("/workouts", workout);
@@ -17,6 +22,14 @@ class WorkoutService {
     const {
       data: { data },
     } = await api().get<WorkoutsResponse>("/workouts");
+
+    return data;
+  }
+
+  async findWorkout(workoutId: string) {
+    const {
+      data: { data },
+    } = await api().get<WorkoutResponse>(`/workouts/${workoutId}`);
 
     return data;
   }

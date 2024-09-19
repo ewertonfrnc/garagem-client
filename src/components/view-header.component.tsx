@@ -8,7 +8,7 @@ export default function ViewHeader({ title }: Props) {
     <div className={"flex items-center gap-4"}>
       <button
         className={"h-10 w-10 rounded-full bg-stone-800"}
-        onClick={() => navigate("/")}
+        onClick={() => navigate(-1)}
       >
         &laquo;
       </button>
