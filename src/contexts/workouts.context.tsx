@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { Workout } from "../interfaces/workout.interfaces.ts";
 import { WorkoutService } from "../services";
+import { WorkoutFormValues } from "../interfaces/exercices.interfaces.ts";
 
 type WorkoutsContextType = {
   error: string;
@@ -8,6 +9,7 @@ type WorkoutsContextType = {
   workout: Workout;
   workouts: Workout[];
   findWorkout: (workoutId: string) => void;
+  createWorkout: (workout: WorkoutFormValues) => void;
 };
 export const WorkoutsContext = createContext<WorkoutsContextType>({
   error: "",
@@ -15,6 +17,7 @@ export const WorkoutsContext = createContext<WorkoutsContextType>({
   workout: {} as Workout,
   workouts: [],
   findWorkout: () => {},
+  createWorkout: () => {},
 });
 
 type Props = { children: ReactNode };
@@ -23,6 +26,16 @@ export const WorkoutsProvider = ({ children }: Props) => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  function createWorkout(workout: WorkoutFormValues) {
+    setLoading(true);
+
+    WorkoutService.createWorkout(workout).then((createdWorkout) =>
+      setWorkouts([createdWorkout, ...workouts]),
+    );
+
+    setLoading(false);
+  }
 
   function findAllWorkouts() {
     setLoading(true);
@@ -48,7 +61,14 @@ export const WorkoutsProvider = ({ children }: Props) => {
     findAllWorkouts();
   }, []);
 
-  const value = { error, loading, workout, workouts, findWorkout };
+  const value = {
+    error,
+    loading,
+    workout,
+    workouts,
+    findWorkout,
+    createWorkout,
+  };
   return (
     <WorkoutsContext.Provider value={value}>
       {children}

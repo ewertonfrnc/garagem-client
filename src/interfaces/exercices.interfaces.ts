@@ -11,7 +11,7 @@ export type Exercise = {
   instructions: Instruction;
 };
 
-export type workoutFormValues = {
+export type WorkoutFormValues = {
   name: string;
   description: string;
 };

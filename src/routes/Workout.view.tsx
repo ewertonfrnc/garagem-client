@@ -6,10 +6,16 @@ import ViewWrapper from "../components/view-wrapper.component.tsx";
 import ViewHeader from "../components/view-header.component.tsx";
 import WorkoutCard from "../components/workout/workout-card.component.tsx";
 import WorkoutForm from "../components/workout/workout-form.component.tsx";
+import { WorkoutFormValues } from "../interfaces/exercices.interfaces.ts";
 
 export default function WorkoutView() {
-  const { loading, workouts } = useContext(WorkoutsContext);
+  const { loading, workouts, createWorkout } = useContext(WorkoutsContext);
   const [isEditing, setIsEditing] = useState(false);
+
+  function handleSubmit(formValues: WorkoutFormValues) {
+    createWorkout(formValues);
+    setIsEditing(!isEditing);
+  }
 
   return (
     <ViewWrapper>
@@ -20,12 +26,12 @@ export default function WorkoutView() {
           onClick={() => setIsEditing(!isEditing)}
           className="rounded-full bg-stone-900 px-4 py-2 transition hover:bg-stone-800"
         >
-          Criar treino
+          {!isEditing ? "Criar treino" : "Cancelar"}
         </button>
       </div>
 
       {isEditing ? (
-        <WorkoutForm />
+        <WorkoutForm onSubmit={handleSubmit} />
       ) : (
         <div>
           {loading ? (
