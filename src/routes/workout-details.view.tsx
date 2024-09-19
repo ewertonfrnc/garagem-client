@@ -13,7 +13,7 @@ export default function WorkoutDetails() {
     if (workoutId) {
       findWorkout(workoutId);
     }
-  }, [findWorkout, workoutId]);
+  }, [workoutId]);
 
   return (
     <ViewWrapper>
